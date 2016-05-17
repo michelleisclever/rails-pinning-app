@@ -1,45 +1,4 @@
 <h1>Add a New Pin!</h1>
-<% if !@errors.nil? %>
-<div class="text-danger">
-    <label><%= pluralize(@errors.count, "error") %> prohibited this pin from being saved:</label>
-    <ul>
-        <% @errors.full_messages.each do |msg| %>
-        <li><%= "#{msg}" %></li>
-    <% end %>
-    </ul>
-</div>
-<% end %>
+<%= render 'form' %>
 
-<%= form_for(@pin) do |f| %>
-<div class="form-group">
-<label for="pin_title">Title</label>
-    <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
-</div>
-
-    <div class="form-group">
-<label for="pin_url">Web Address</label>
-        <%= f.url_field :url, class: "form-control", placeholder: "http://www.someexample.com" %>
-    </div>
-
-     <div class="form-group">
-<label for="pin_text">Description</label>
-         <%= f.text_area :text, class: "form-control", placeholder: "Description" %>
-    </div>
-
-     <div class="form-group">
-<label for="pin_slug">Slug</label>
-         <%= f.text_field :slug, class: "form-control", placeholder: "Pretty URL" %>
-    </div>
-
-     <div class="form-group">
-<label for="pin_category_id">Category</label>
-         <%= f.collection_select(:category_id, Category.all, :id, :name, {prompt: "Select a category"}, {class: "form-control"}) %>
-    </div>
-    
-    <div class="control-group">
-    <div class="controls">
-        <%= f.button :Submit, class: "btn btn-default" %>
-        </div>
-    </div>
-
-<% end %>
+<%= link_to 'Cancel', root_path %>

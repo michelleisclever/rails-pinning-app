@@ -36,7 +36,7 @@ end
         url: "http://railswizard.org", 
         slug: "rails-wizard", 
         text: "A fun and helpful Rails Resource",
-        resource_type: "rails"}    
+          category_id: 2}    
     end
     
     after(:each) do
@@ -78,7 +78,104 @@ end
       post :create, pin: @pin_hash
       expect(assigns[:errors].present?).to be(true)
     end    
-    
   end
+
+describe "GET edit" do
+    
+       before(:each) do
+           @pin_test = Pin.first  
+    end
+
+# get to pins/id/edit
+# responds successfully 
+     it 'responds with successfully' do
+         get :edit, id: @pin_test
+      expect(response.success?).to be(true)
+    end
+    
+# renders the edit template
+    
+    it 'renders the edit view' do
+        get :edit, id: @pin_test   
+        expect(response).to render_template(:edit)
+    end
+    
+# assigns an instance variable called @pin to the Pin with the appropriate id
+    
+    it 'assigns an instance variable called @pin to the Pin' do
+        get :edit, id: @pin_test
+        expect(assigns(:pin)).to eq(Pin.find(1))
+    end
+    
+    
+end
+
+#PUT update test taken from https://github.com/tnataly/coder-pinterest/blob/ccd1232d3783debdc57b536525c0fa82289d4cc7/spec/controllers/pins_controller_spec.rb
+  
+  describe "PUT update" do  
+      before (:all) do
+        @pin = Pin.create(title: "Learn RUBY hard way", 
+          url: "http://google.com", 
+          text: "Some super text",
+          slug: "ruby-hard",
+          category_id: "ruby") 
+    end
+
+    context "request to /pins with valid parameters" do
+    let(:attr) do
+          { :title => "Learn Rails", 
+            :url => "New url",
+            :text => "The new text",
+            :slug => "ruby-hard"
+           }
+        end      
+
+    before(:each) do
+          put :update, :id => @pin.id, :pin => attr
+          @pin.reload
+    end
+
+      it 'updates a pin' do
+        expect(@pin.title).to eql attr[:title] 
+        expect(@pin.url).to eql attr[:url]
+        expect(@pin.text).to eql attr[:text]
+        expect(@pin.slug).to eql attr[:slug]
+        #puts "===================\n" + response.body
+     end
+    
+      it 'redirects to the show view' do
+          expect(response).to redirect_to(pin_path(assigns(:pin)))
+      end
+    end
+
+    context "request to /pins with invalid parameters" do
+    let(:attr) do
+          { :title => "", 
+            :url => "",
+            :text => "The new text",
+            :slug => "ruby-hard"
+           }
+        end      
+
+
+
+    before(:each) do
+          put :update, :id => @pin.id, :pin => attr
+          @pin.reload
+    end
+
+    it "assigns an @errors instance variable" do
+      #puts "===================\n" + response.body
+      expect(assigns[:errors].present?).to be(true)
+    end
+
+    it "renders the edit view" do
+      #puts "===================\n" + response.body
+      expect(response).to render_template(:edit)
+    end
+  end
+
+  end
+
 end
 end

@@ -52,3 +52,4 @@ gem 'rspec-rails'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 gem 'rails_12factor'
 gem 'coffee-script-source', '1.8.0'
+gem 'paperclip'
