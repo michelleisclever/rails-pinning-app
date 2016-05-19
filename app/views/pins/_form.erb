@@ -9,40 +9,74 @@
 </div>
 <% end %>
 
-<%= form_for(@pin, multipart: true) do |f| %>
-<div class="form-group">
-<label for="pin_title">Title</label>
+<%= form_for(@pin, multipart: true, :html => {:class => 'col-md-8 form-horizontal'})  do |f| %>
+<div class="panel">
+    <div class="panel-body">
+		<div class="form-group">
+            
+			<label for="pin_title" class="col-md-2 control-label">Title</label>
+            
+			<div class="col-md-8">
     <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
+            </div>
+            
 </div>
 
-    <div class="form-group">
-<label for="pin_url">Web Address</label>
+	<div class="form-group">
+        
+			<label for="pin_url" class="col-md-2 control-label">Web Address</label>
+        
+			<div class="col-md-8">
         <%= f.url_field :url, class: "form-control", placeholder: "http://www.someexample.com" %>
+        </div>
+        
     </div>
 
-     <div class="form-group">
-<label for="pin_text">Description</label>
+		<div class="form-group">
+            
+			<label for="pin_text" class="col-md-2 control-label">Description</label>
+            
+			<div class="col-md-8">
          <%= f.text_area :text, class: "form-control", placeholder: "Description" %>
-    </div>
-
-     <div class="form-group">
-<label for="pin_slug">Slug</label>
-         <%= f.text_field :slug, class: "form-control", placeholder: "Pretty URL" %>
-    </div>
-
-     <div class="form-group">
-<label for="pin_category_id">Category</label>
-         <%= f.collection_select(:category_id, Category.all, :id, :name, {prompt: "Select a category"}, {class: "form-control"}) %>
+</div>
+            
     </div>
 
 <div class="form-group">
-<label for="pin_image">Image</label>
-    <%= f.file_field :image, class: "form-control" %></div>
-    <div class="control-group">
+    
+			<label for="pin_slug" class="col-md-2 control-label">Slug</label>
+    
+			<div class="col-md-8">
+         <%= f.text_field :slug, class: "form-control", placeholder: "Pretty URL" %>
+    </div>
+    
+    </div>
+
+		<div class="form-group">
+            
+			<label for="pin_category_id" class="col-md-2 control-label">Category</label>
+            
+			<div class="col-md-8">
+         <%= f.collection_select(:category_id, Category.all, :id, :name, {prompt: "Select a category"}, {class: "form-control"}) %>
+            </div>
+            
+    </div>
+
+<div class="form-group">
+			<label for="pin_image" class="col-md-2 control-label">Image</label>
+			<div class="col-md-8">
+        <%= f.file_field :image, class: "form-control" %> 
+    </div>
+   
+</div>
+
         
-    <div class="controls">
+<div class="form-group">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
         <%= f.button :Submit, class: "btn btn-default" %>
         </div>
     </div>
-
+</div>
+</div>
 <% end %>
