@@ -1,0 +1,26 @@
+<h1>Log In!</h1>
+
+<%= form_tag :action => "login", :html => {:class => 'col-md-8 form-horizontal'} do %>
+
+<div class="panel">
+    <div class="panel-body">
+<div class="form-group">
+    <%= label_tag :email %><br>
+    <%= email_field_tag :email, params[:email], class: "form-control" %>
+</div>
+
+<div class="form-group">
+    <%= label_tag :password %><br>
+    <%= password_field_tag :password, params[:password], class:"form-control" %>
+</div>
+
+<div class="form-group">
+    <%= submit_tag "Sign in", class: "btn btn-default" %>
+</div>
+        <% if @errors %>
+  <div id="error_explanation">
+    <h2><%= @errors %></h2>
+    </div>
+        <% end %>
+</div>
+<% end %>
