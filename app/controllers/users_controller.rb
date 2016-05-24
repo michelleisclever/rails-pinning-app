@@ -66,17 +66,15 @@ class UsersController < ApplicationController
     end
     
     def authenticate
-        @user = User.authenticate(params[:email], params[:password])
-        if @user[:user_id] = @user.id
-            render :show, notice => "Logged in!"
-        else
-        if @user.nil?
-            @errors = "Either email or password is incorrect"
-            render :login
-            
-        end
-        end
-end
+    @user = User.authenticate(params[:email], params[:password])
+    if @user.nil?
+      @errors = "Either email or password is incorrect"
+      render :login
+    else
+      session[:user_id] = @user.id
+      redirect_to user_path(@user)
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
