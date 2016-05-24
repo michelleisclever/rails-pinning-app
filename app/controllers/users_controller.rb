@@ -7,6 +7,22 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+     def login
+        
+    end
+    
+    def authenticate
+    @user = User.authenticate(params[:email], params[:password])
+    if !@user.nil?
+     
+        redirect_to "/users/#{@user[:id]}"
+    else
+       @errors = "Either email or password is incorrect"
+        render :login
+    end
+  end
+
+    
   # GET /users/1
   # GET /users/1.json
   def show
@@ -61,21 +77,6 @@ class UsersController < ApplicationController
     end
   end
     
-    def login
-        
-    end
-    
-    def authenticate
-    @user = User.authenticate(params[:email], params[:password])
-    if @user.nil?
-      @errors = "Either email or password is incorrect"
-      render :login
-    else
-      session[:user_id] = @user.id
-      redirect_to user_path(@user)
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

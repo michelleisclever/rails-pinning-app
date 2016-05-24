@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     
     get 'signup' => "users#new", as: :signup
     
-    get '/login' => "users#login"
+    get '/login' => "users#login", as: :login
     
     post 'login' => "users#authenticate"
     
