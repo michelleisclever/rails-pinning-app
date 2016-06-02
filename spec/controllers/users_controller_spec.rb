@@ -177,7 +177,7 @@ RSpec.describe UsersController, type: :controller do
         it "renders the show view if params valid" do
             post :authenticate, @valid_user_hash
             #write expectation
-            expect(response).to redirect_to :action => :show, :id => assigns(:user).id
+            expect(response).to redirect_to :action => :show, :id => assigns(@user).id
         end
         
         it "populates @user if params valid" do
