@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :email, :password
   validates_uniqueness_of :email
 
-    def has_password?(password)
-        password = User.find_by_password(password)
-    end
+    #def has_password?(password)
+        #password = #User.find_by_password(password)
+   # end
     
     def self.authenticate(email, password)
       @user = User.find_by_email(email)

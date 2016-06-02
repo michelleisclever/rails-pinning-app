@@ -163,7 +163,7 @@ RSpec.describe UsersController, type: :controller do
     
     describe "POST login" do
         before(:all) do
-            @user = User.create(email: "coder@skillcrush.com", password: "secret")
+            @user = User.create(email: "coder@skillcrush.com", password: "secret", first_name: "Michelle", last_name: "McManus")
             @valid_user_hash = {email: @user.email, password: @user.password}
             @invalid_user_hash = {email: "", password: ""}
         end
@@ -177,13 +177,13 @@ RSpec.describe UsersController, type: :controller do
         it "renders the show view if params valid" do
             post :authenticate, @valid_user_hash
             #write expectation
-            expect(response).to redirect_to :action => :show, :id => assigns(@user).id
+            expect(response).to redirect_to "/users/#{@user[:id]}"
         end
         
         it "populates @user if params valid" do
             post :authenticate, @valid_user_hash
             #write expectation
-            expect(assigns(:user)).to eq(user)
+            expect(@user.present?).to be(true)
         end
         
         it "renders the login view if params invalid" do
