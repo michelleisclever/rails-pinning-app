@@ -119,7 +119,7 @@ end
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+          {first_name: "Michelle", last_name: "McManus"}
       }
 
       it "updates the requested user" do
@@ -127,7 +127,8 @@ end
           post :authenticate, {email: @user.email, password: @user.password}
         put :update, {:id => user.to_param, :user => new_attributes}, valid_session
         user.reload
-        skip("Add assertions for updated state")
+          expect(user.first_name).to eq("Michelle")
+          expect(user.last_name).to eq("McManus")
       end
 
       it "assigns the requested user as @user" do
