@@ -152,8 +152,9 @@ end
 
       it "re-renders the 'edit' template" do
         user = User.create! valid_attributes
-        put :update, {:id => user.to_param, :user => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+			post :authenticate, {email: user.email, password: user.password}
+	        put :update, {:id => user.to_param, :user => invalid_attributes}, valid_session
+	        expect(response).to render_template("edit")
       end
     end
   end
