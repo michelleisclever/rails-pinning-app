@@ -15,9 +15,12 @@ Rails.application.routes.draw do
     
     post 'login' => "users#authenticate"
     
+    delete '/logout/:id' => "users#logout", as: :logout
+    
     resources :pins
     
     get '/library' => 'pins#index'
+    
     
     
   # Example of regular route:
