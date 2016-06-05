@@ -10,6 +10,7 @@
 <% end %>
 
 <%= form_for(@pin, multipart: true, :html => {:class => 'col-md-8 form-horizontal'})  do |f| %>
+<%= f.hidden_field :user_id, value: current_user.id %>
 <div class="panel">
     <div class="panel-body">
 		<div class="form-group">
